@@ -8,7 +8,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: appServicePlanName
   location: location
   properties: {
-    reserved: true
+    reserved: true 
   } 
   sku: {   
     name: sku 
