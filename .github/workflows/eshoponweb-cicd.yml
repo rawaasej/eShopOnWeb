@@ -11,7 +11,6 @@ env:
   SUBSCRIPTION-ID: 4be52f1d-4cb6-4560-8984-abac2398c39e
   WEBAPP-NAME: devops-webapp-westeurope-2129021907 
  
-
 jobs:
   #Build, test and publish .net web project in repository
   buildandtest:
@@ -60,7 +59,7 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v4
       with:
-        name: .net-app
+        name: .net-app 
         path: .net-app
   
     #Download the bicep templates from previous job
