@@ -31,7 +31,7 @@ jobs:
     - name: Test with dotnet
       run: dotnet test ./eShopOnWeb.sln --configuration Release
     - name: dotnet publish
-      run: |
+      run: 
         dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
         zip -r app.zip ${{env.DOTNET_ROOT}}/myapp
     # upload the published website code artifacts
