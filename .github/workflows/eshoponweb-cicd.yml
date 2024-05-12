@@ -4,13 +4,13 @@ name: eShopOnWeb Build and Test
 on: workflow_dispatch
 
 #Environment variables https://docs.github.com/en/actions/learn-github-actions/environment-variables
-env: 
-  RESOURCE-GROUP: rg-eshoponweb-westeurope 
-  LOCATION: westeurope
-  TEMPLATE-FILE: infra/webapp.bicep
-  SUBSCRIPTION-ID: 4be52f1d-4cb6-4560-8984-abac2398c39e
-  WEBAPP-NAME: devops-webapp-westeurope-2129021907 
- 
+env:
+ RESOURCE-GROUP: rg-eshoponweb-westeurope
+ LOCATION: westeurope
+ TEMPLATE-FILE: infra/webapp.bicep
+ SUBSCRIPTION-ID: 4be52f1d-4cb6-4560-8984-abac2398c39e
+ WEBAPP-NAME: devops-webapp-westeurope-2129021907
+
 jobs:
   #Build, test and publish .net web project in repository
   buildandtest:
@@ -30,7 +30,7 @@ jobs:
     - name: Test with dotnet
       run: dotnet test ./eShopOnWeb.sln --configuration Release
     - name: dotnet publish
-      run: 
+      run: |
         dotnet publish ./src/Web/Web.csproj -c Release -o ${{env.DOTNET_ROOT}}/myapp
         zip -r app.zip ${{env.DOTNET_ROOT}}/myapp
     # upload the published website code artifacts
@@ -59,7 +59,7 @@ jobs:
     - name: Download artifact from build job
       uses: actions/download-artifact@v4
       with:
-        name: .net-app 
+        name: .net-app
         path: .net-app
   
     #Download the bicep templates from previous job
@@ -81,7 +81,7 @@ jobs:
       with:
         subscriptionId: ${{ env.SUBSCRIPTION-ID }}
         resourceGroupName: ${{ env.RESOURCE-GROUP }}
-        template: bicep-template/webapp.bicep 
+        template: bicep-template/webapp.bicep
         parameters: 'webAppName=${{ env.WEBAPP-NAME }} location=${{ env.LOCATION }}'
         failOnStdErr: false   
     
